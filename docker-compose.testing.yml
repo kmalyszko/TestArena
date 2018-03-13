@@ -1,0 +1,27 @@
+version: '2'
+services:
+  testarena-app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - testarena-mysql
+
+  testarena-nginx:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - testarena-app
+
+  testarena-mysql:
+    image: mysql:5.6
+    volumes:
+      - /dockervolumes/testarena/db_data:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=ppEJcxC4DnwZ4HYP"
+      - "MYSQL_DATABASE=testarena"

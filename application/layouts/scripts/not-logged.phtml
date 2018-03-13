@@ -1,0 +1,25 @@
+<?php echo $this->partial('header.phtml', array(
+  'keywords'    => $this->keywords,
+  'description' => $this->description,
+  'messageBox'  => $this->messageBox,
+  'language'    => $this->language,
+  'locale'      => $this->locale,
+  'cModule'     => $this->cModule,
+  'cController'=> $this->cController,
+  'cAction'     => $this->cAction
+)); ?>
+
+<section id="content_login">
+  <header id="tc-head">
+    <div class="gk-page" id="tc-header-mod">
+      <div class="boxx  imageBg all widget_text" id="text-2">
+        <div class="textwidget">
+          <a href="<?php echo $this->url(array(), 'index')?>" class="login_tc_header"></a>
+            <?php echo $this->layout()->content ?>
+        </div>
+      </div>
+    </div>
+  </header>
+</section>
+
+<?php echo $this->partial('footer-static.phtml', array('locale' => $this->locale));

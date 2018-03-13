@@ -1,0 +1,84 @@
+<?php echo $this->doctype() ?>
+<html lang="<?php echo Zend_Registry::get('Zend_Locale')->getLanguage()?>">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/css/chosen.css">
+  <style type="text/css" media="all">
+    /* fix rtl for demo */
+    .chosen-rtl .chosen-drop { left: -9000px; }
+  </style>    
+    <?php echo $this->headMeta('http-equiv="Content-Type" content="text/html; charset=utf-8"')
+      ->appendName('keywords', $this->keywords)
+      ->appendName('description', $this->description === null ? $this->generalT('headDescription') : $this->description) ?>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink(array('rel' => 'icon', 'type' => 'image/x-icon', 'href' => $this->baseUrl('/img/favicon.ico?'.APP_VERSION)))
+      ->appendStylesheet($this->baseUrl('/css/token-input.css'))
+      ->appendStylesheet($this->baseUrl('/css/token-input-facebook.css'))
+      ->appendStylesheet($this->baseUrl('/css/ui-lightness/jquery-ui-1.10.3.custom.min.css'))
+      ->appendStylesheet($this->baseUrl('/css/jquery-ui-timepicker-addon.min.css'))
+      ->appendStylesheet($this->baseUrl('/css/spectrum.css'))
+      ->appendStylesheet($this->baseUrl('/css/elegant-fonts.css'))
+      ->appendStylesheet($this->baseUrl('/css/icomoon-fonts.css'))
+      ->appendStylesheet($this->baseUrl('/css/lightbox.min.css'))
+      ->appendStylesheet($this->baseUrl('/css/global.css?'.APP_VERSION)) 
+      ->appendStylesheet($this->baseUrl('/css/popbox.css'))?>
+    
+    <?php $this->headScript()
+      ->appendFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+      ->appendFile($this->baseUrl('/js/jquery-ui-1.10.3.custom.min.js'))
+      ->appendFile($this->baseUrl('/js/jquery-ui-timepicker-addon.min.js?2'))
+      ->appendFile($this->baseUrl('/js/jquery.tokeninput.js'))
+      ->appendFile($this->baseUrl('/js/jquery.tinyscrollbar.min.js'))
+      ->appendFile($this->baseUrl('/js/jquery.tmpl.min.js'))
+      ->appendFile($this->baseUrl('/js/jquery.jscroll.min.js'))
+      ->appendFile($this->baseUrl('/js/lightbox.js'))
+      ->appendFile($this->baseUrl('/js/chosen.jquery.js'))
+      ->appendFile($this->baseUrl('/js/spectrum.js'))
+      ->appendFile($this->baseUrl('/js/popbox.js'))
+      ->appendFile($this->baseUrl('/js/global.js?'.APP_VERSION))?>  
+  
+    <?php if ($this->cModule == 'dashboard' && $this->cController == 'index' && $this->cAction == 'index'): ?>
+      <?php $this->headScript()
+        ->appendFile('https://www.google.com/jsapi')
+        ->appendFile('/js/google_chart.js?2'); ?>
+    <?php endif;?>
+  
+    <?php if ($this->language == 'pl')
+    {
+      $this->headScript()
+        ->appendFile($this->baseUrl('/js/i18n/jquery.ui.datepicker-pl.js'))
+        ->appendFile($this->baseUrl('/js/i18n/jquery.ui.timepicker-pl.js'))
+        ->appendFile($this->baseUrl('/js/i18n/jquery.spectrum-pl.js'));
+    } ?>
+    
+    <?php echo $this->headScript() ?>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:200,700,800&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <?php if (getenv('APPLICATION_ENV') == 'pawel_piaskowy'): ?>
+      <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');</script>
+    <?php endif; ?>
+    
+    <?php if (($this->cModule == 'user' && $this->cController == 'login' && ($this->cAction == 'index' || $this->cAction == 'process'))
+              || ($this->cModule == 'user' && $this->cController == 'password' && ($this->cAction == 'recover' || $this->cAction == 'recover-process'))
+              || ($this->cModule == 'default' && $this->cController == 'contact' && ($this->cAction == 'index' || $this->cAction == 'process'))): ?>
+      <script src="https://www.google.com/recaptcha/api.js?hl=pl"></script>
+    <?php endif;?>  
+      
+  </head>
+<body>
+
+<script type='text/javascript'>
+  var baseUrl = '<?php echo $this->baseUrl() ?>';
+  currentLanguage = '<?php echo $this->language ?>';
+  language.noResultsFor = '<?php echo $this->generalT('Brak wyników dla') ?>';
+  language.enterPhraseSearched = '<?php echo $this->generalT('Wpisz szukaną frazę') ?>';
+  language.noResults = '<?php echo $this->generalT('Brak rezultatów') ?>';
+  language.searching = '<?php echo $this->generalT('Wyszukiwanie...') ?>';
+  language.lightBoxLabel = '<?php echo $this->generalT('lightBoxLabel') ?>';
+</script>
+
+<?php echo $this->partial('message-box.phtml', array('messageBox' => $this->messageBox)) ?>
+  
+<noscript>
+	<div class="no_js"><?php echo $this->generalT('noScript') ?></div>
+</noscript>
