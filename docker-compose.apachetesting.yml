@@ -10,7 +10,9 @@ services:
       - testarena-mysql
     links:
       - testarena-mysql
-
+    volumes:
+      - /dockervolumes/testarena/logs:/var/log
+      
   testarena-mysql:
     build:
       context: ./
