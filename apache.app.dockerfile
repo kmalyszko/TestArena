@@ -8,8 +8,11 @@ RUN docker-php-ext-install gd
 WORKDIR /var/www/html
 
 COPY . /var/www/html
+
 ### copy app configuration file -> you have to create it first and fill with working data (database, mails, captha secrets and so on) ###
 COPY application.testing.ini ./application/configs/application.ini
+
+### apache virtualhost exported to separate file
 COPY apache.vhost.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN a2enmod rewrite
